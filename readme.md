@@ -1,5 +1,5 @@
 <p>
-  <img src="pic/Framework_MiLk-FD.jpg" width="1000">
+  <img src="pic/Framework_MiLk-FD.png" width="1000">
   <br />
 </p>
 
