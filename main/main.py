@@ -8,7 +8,7 @@ from torch.nn import Linear
 import torch.nn as nn
 import torch.nn.functional as F
 import random
-from utils_HGT import load_dataset, shuffle_data
+from utils import load_dataset, shuffle_data
 from model import MiLk-FD, train, test
 import time
 import os
