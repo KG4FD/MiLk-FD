@@ -11,27 +11,17 @@ import sklearn.metrics as sm
 import numpy as np
 
 
-class KGT(torch.nn.Module):
+class MiLk-FD(torch.nn.Module):
     def __init__(self, hgraph, hidden_channels, out_channels, num_layers, num_heads):
         super().__init__()
 
-        # new add 将各种类型的边使用线性层转换为同一个维度
+        # nlinear transform
         self.lin_dict = torch.nn.ModuleDict()
         for node_type in hgraph.node_types:
             self.lin_dict[node_type] = Linear(-1, hidden_channels)
 
         self.convs = torch.nn.ModuleList()
-        # for i in range(num_layers):
-        #     conv = HeteroConv({
-        #         ('news', 'on', 'topic'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('topic', 'in', 'news'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('news', 'has', 'entities'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('entities', 'in', 'news'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('entities', 'similar', 'entities'): TransformerConv(-1, hidden_channels, add_self_loops=False),
-        #         ('kg_entities', 'in', 'news'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('news', 'has', 'kg_entities'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #         ('kg_entities', 'to', 'entities'): TransformerConv((-1, -1), hidden_channels, add_self_loops=False),
-        #     }, aggr='sum')
+     
         for i in range(num_layers):
             conv = HGTConv(hidden_channels, hidden_channels, hgraph.metadata(), num_heads, group='sum')
             # conv = HGTConv(hidden_channels, hidden_channels, hgraph.metadata(), num_heads, 'mean')
@@ -84,11 +74,8 @@ class Aggregation(torch.nn.Module):
 
 
 def train(model, data, args):
-# def train(model, data, kg, args):
     model.train()
-    # optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
-    # optimizer = torch.optim.SGD(model.parameters(), lr=args.learning_rate, momentum=0.9)
-    # optimizer = torch.optim.RAdam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
+  
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     criterion = torch.nn.CrossEntropyLoss()
     # criterion = torch.nn.NLLLoss()
@@ -132,12 +119,7 @@ def test(model, data, args):
     # for i in predict:
     #     x = i[0] + i[1]
     #     plus.append(x)
-    # print("预测值：", pred)
-    # print("预测概率", out[data['news'].test_mask])
-    # print("pred_list", predict)
-    # print("取出的值", pred_list)
-    # print("真实label", y)
-    # print("plus", plus)
+
 
     # revised "average="
     # acc = accuracy_score(y, pred)
@@ -147,7 +129,6 @@ def test(model, data, args):
     # auc = roc_auc_score(y, pred, average='micro')
     acc = accuracy_score(y, pred)
     precision = precision_score(y, pred, )
-    # 修改
     f1 = f1_score(y, pred)
     recall = recall_score(y, pred,)
     # f1_1 = f1_score(y, pred, average='weighted')
@@ -170,7 +151,6 @@ def test(model, data, args):
     # plt.figure()
     # lw = 2
     # plt.figure(figsize=(10, 10))
-    # # 假正率为横坐标， 真正率为纵坐标
     # plt.plot(fpr, tpr, color='red', lw=lw, label="ROC curve (area = %0.3f)" % roc_auc)
     # plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
     
