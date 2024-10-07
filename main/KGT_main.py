@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import random
 from utils_HGT import load_dataset, shuffle_data
-from KGTransformer import KGT, train, test
+from model import KGT, train, test
 import time
 import os
 
@@ -70,7 +70,6 @@ if __name__ == "__main__":
     # end = time.time()
     # t_time = end - start
     # print(t_time)
-    # with open("/scratch/rp72/bx6935/time_statistics", "a+",encoding='utf8') as f:
-    #     f.write(f"Approach: KGEGNN; runing_time: {t_time}s\n")
+
         
         
