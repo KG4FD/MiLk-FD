@@ -51,7 +51,7 @@ if __name__ == "__main__":
         # print(hgraph.node_types)
         # print(hgraph.metadata())
         # Initialize model parameters
-        model = KGT(hgraph, hidden_channels=args.hidden_channels, out_channels=2, num_layers=args.gnn_layers, num_heads=2)
+        model = MiLk-FD(hgraph, hidden_channels=args.hidden_channels, out_channels=2, num_layers=args.gnn_layers, num_heads=2)
         
         model.to(device)
         hgraph.to(device)
