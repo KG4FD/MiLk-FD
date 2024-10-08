@@ -149,7 +149,6 @@ def test(model, data, args):
     # roc_auc = sm.auc(fpr, tpr)
 
     # plt.figure()
-    # lw = 2
     # plt.figure(figsize=(10, 10))
     # plt.plot(fpr, tpr, color='red', lw=lw, label="ROC curve (area = %0.3f)" % roc_auc)
     # plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
